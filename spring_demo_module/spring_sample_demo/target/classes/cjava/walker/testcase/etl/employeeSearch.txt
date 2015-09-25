@@ -1,3 +1,0 @@
-#employee_id, emp_code, manager_code, type, base_salary
-A342|XSMITH|A456|IM|Permanent|43,500.00
-A342|YSMITH|A678|IM|Contract|57,700.00 
