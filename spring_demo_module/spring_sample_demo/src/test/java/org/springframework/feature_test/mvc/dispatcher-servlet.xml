@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"
+	default-lazy-init="false">
+
+	<context:component-scan base-package="cjava.walker.common.controller" />
+	
+	<bean id="groupRepository" class="cjava.walker.testcase.support.MockFactoryBean">
+		<constructor-arg index="0" value="cjava.walker.common.repository.GroupRepository"/>
+	</bean>
+
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+	
+<!-- 	上述的AnnotationMethodHandlerAdapter在3.2版本中过时 建议使用RequestMappingHandlerAdapter : 
+		这个类会在使用mvc:annotation-driven的时候被注册 -->
+	<!-- <mvc:annotation-driven >
+		<mvc:message-converters>
+			<ref local="mappingJacksonHttpMessageConverter"/>
+		</mvc:message-converters>
+	</mvc:annotation-driven> -->
+	
+
+
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
+		<property name="maxUploadSize"> <value>50048576</value> </property> </bean> -->
+
+<!-- 	<bean id="userPreferences" class="com.foo.DefaultUserPreferences"
+		scope="session">
+		<aop:scoped-proxy proxy-target-class="false" />
+	</bean>
+	
+	<bean id="userManager" class="com.foo.UserManager">
+		<property name="userPreferences" ref="userPreferences" />
+	</bean>
+ -->
+</beans>

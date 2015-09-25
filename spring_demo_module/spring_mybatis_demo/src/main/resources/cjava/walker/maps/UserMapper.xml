@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.mybatis.spring.sample.mapper.UserMapper">
+
+	<resultMap id="userMap" type="user">
+		<result column="id" property="id" jdbcType="INTEGER" /> <!-- BIGINT -->
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<!-- 		
+			<result column="sex" property="sex" jdbcType="INTEGER" 	javaType="sex" typeHandler="sexTypeHandler" /> 
+		-->
+		<!-- 在sqlMapConfig中定义了指定 javaType,jddbcType对应的TypeHandler这里就可以不用指定了 -->
+		<result column="sex" property="sex" jdbcType="INTEGER" 	javaType="sex"/>
+		<result column="age" property="age" jdbcType="INTEGER" />
+		<result column="group_id" property="groupId" jdbcType="BIGINT" />
+		<result column="add_time" property="addTime" />
+	</resultMap>
+	
+
+	<parameterMap type="user" id="userParam">
+		<parameter property="id" />
+		<parameter property="name" />
+		<parameter property="sex" />
+		<parameter property="age" />
+		<parameter property="groupId" />
+		<parameter property="addTime" />
+	</parameterMap>
+
+
+	<select id="getAllUsers" resultMap="userMap">
+		select * from users
+	</select>
+	
+	<!-- 注意和 UserMapper.java类中的接口方法的名称  不要重复 当前的配置文件和Mapper接口类 体现的使用相互相乘的作用  这里主要用来 配置 resultMap,typeHandler，insert的时候使用selectKey...remain -->
+	<select id="getUserById" resultMap="userMap" parameterType="INTEGER">
+		select * from users where id = #{id}
+	</select>
+
+	<select id="getUsersByName" resultMap="userMap">
+		select * from users where
+		name=${value}
+	</select>
+
+	<insert id="insertUsers" parameterMap="userParam">
+		insert into users
+			(id,name,passwd,age,sex,group_id,add_time)
+		values(
+			#{id},
+			#{name},
+			#{passwd},
+			#{age},
+			#{sex,jdbcType=INTEGER,javaType=sex},
+			<!-- 同样如果sqlMapConfiguration中声明了 指定类型使用 的typeHandler 上述的insert语句可以不用指定typeHandler 
+			       #{sex,typeHandler=sexTypeHandler} 
+			-->
+			#{groupId},
+			#{addTime}
+		)
+		<selectKey keyProperty="id" resultType="java.lang.Integer"> <!-- use java.lang.Long if you want/need -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+   
+	<delete id="deleteUsers" parameterType="INTEGER">
+		delete from users where id=#{value}
+	</delete>
+
+</mapper>

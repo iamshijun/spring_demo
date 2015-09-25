@@ -1,0 +1,472 @@
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>下载虾米音乐</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="data-spm" content="a1z40">
+<meta name="viewport" content="width=device-width, user-scalable=0">
+<link href="http://www.xiami.com/favicon.ico" type="image/x-icon"
+	rel="shortcut icon">
+<link
+	href="http://img.xiami.net/res/img/common/ipad/xiami_logo_apple.png"
+	rel="apple-touch-icon">
+
+<style>
+article, aside, details, figcaption, figure, footer, header, hgroup, nav,
+	section, summary {
+	display: block
+}
+
+audio, canvas, video {
+	display: inline-block
+}
+
+audio:not ([controls] ){
+	display: none;
+	height: 0
+}
+
+[hidden] {
+	display: none
+}
+
+html {
+	font-family: sans-serif;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%
+}
+
+body {
+	margin: 0
+}
+
+a {
+	-webkit-touch-callout: none
+}
+
+a:focus {
+	outline: thin dotted
+}
+
+a:active, a:hover {
+	outline: 0
+}
+
+h1 {
+	font-size: 2em
+}
+
+h2 {
+	color: #7b838c;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	padding: 0 20px
+}
+
+abbr[title] {
+	border-bottom: 1px dotted
+}
+
+b, strong {
+	font-weight: bold
+}
+
+dfn {
+	font-style: italic
+}
+
+mark {
+	background: #ff0;
+	color: #000
+}
+
+code, kbd, pre, samp {
+	font-family: monospace, serif;
+	font-size: 1em
+}
+
+pre {
+	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word
+}
+
+q {
+	quotes: "\201C" "\201D" "\2018" "\2019"
+}
+
+small {
+	font-size: 80%
+}
+
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline
+}
+
+sup {
+	top: -0.5em
+}
+
+sub {
+	bottom: -0.25em
+}
+
+img {
+	border: 0
+}
+
+svg:not (:root ){
+	overflow: hidden
+}
+
+figure {
+	margin: 0
+}
+
+fieldset {
+	border: 1px solid #c0c0c0;
+	margin: 0 2px;
+	padding: .35em .625em .75em
+}
+
+legend {
+	border: 0;
+	padding: 0
+}
+
+button, input, select, textarea {
+	font-family: inherit;
+	font-size: 100%;
+	margin: 0
+}
+
+button, input {
+	line-height: normal
+}
+
+button, html input[type="button"], input[type="reset"], input[type="submit"]
+	{
+	-webkit-appearance: button;
+	cursor: pointer
+}
+
+button[disabled], input[disabled] {
+	cursor: default
+}
+
+input[type="checkbox"], input[type="radio"] {
+	box-sizing: border-box;
+	padding: 0
+}
+
+input[type="search"] {
+	-webkit-appearance: textfield;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box
+}
+
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration
+	{
+	-webkit-appearance: none
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+	border: 0;
+	padding: 0
+}
+
+textarea {
+	overflow: auto;
+	vertical-align: top
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0
+}
+
+body {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	color: #f7f8fa
+}
+
+header {
+	padding: 20px 0 34px
+}
+
+header h1 {
+	width: 72px;
+	height: 72px;
+	margin: 0 auto
+}
+
+p, h2 {
+	margin: 0;
+	padding: 0
+}
+
+.tit {
+	color: #565e66;
+	font-size: 14px;
+	text-align: center;
+	padding-top: 10px
+}
+
+.apps {
+	padding: 0 40px 10px
+}
+
+.apps-items .appurl {
+	display: block;
+	color: #999;
+	text-decoration: none
+}
+
+.apps-detail {
+	height: 54px;
+	border: #c4c5c9 1px solid;
+	border-radius: 5px;
+	margin-bottom: 30px;
+	background-image: -moz-linear-gradient(top, #fefefe, #f3f4f6);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fefefe),
+		color-stop(1, #f3f4f6));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fefefe',
+		EndColorStr='#f3f4f6');
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorStr='#fefefe', EndColorStr='#f3f4f6')";
+	box-shadow: inset 0 0 1px #fff, 0 1px 1px #dadbde;
+	padding: 5px 0 4px 55px;
+	font-size: 12px;
+	color: #999;
+	line-height: 18px;
+	position: relative
+}
+
+.apps-detail h2 {
+	font-weight: 400;
+	font-size: 12px
+}
+
+.apps-detail h2 b {
+	font-size: 16px;
+	color: #565e66;
+	font-weight: 400
+}
+
+.apps-detail .time {
+	padding-left: 10px
+}
+
+.apps-detail .caret {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	left: 10px;
+	top: 50%;
+	margin-top: -15px;
+	background-size: 30px;
+	background-repeat: no-repeat
+}
+
+.ios .caret {
+	background-image:
+		url(data:image/png;base64,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)
+}
+
+.android .caret {
+	background-image:
+		url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAACV9JREFUeNrcWwlwE9cZ3re70nolS7It2XJsfOAz2EBighvXUDB0QoFMSQYm05ZC20wbQpIhbicHU3PENDhOSSgQhuboJJlOjmmTjE05kpahjVNIuCFAXGMC+Lbl25YPXavd/k9agTDS2ivJltqn+b2779j9v/2P979/n5EgCEQwZcOzm13HaLUqyWK1/am87Jl1MTrtANSPEEEWBU1XGAz6S2XPbjgCl8NwT8fYPntf3S7rnmSwTBHITZXbyjopmjJ+VH0Av4FsYITxtAVCSqVijlPgn1rz45W4JgPj99lXZiGDx+v+QRHuv+/eivqrN9Z0dHYVw7Vx7yvbESIC+/G8sC87c/rB1GnJyXCvKCCnr35yCx28hN0Pffr5rfxrO373xbWGpjOf7D/8sw2PP/otVPdB+zDDMDk0TRVSFJVAwx+bzV6gVqvqBJ53kBQ5EG/QX1z3i59egv5WfB9Q5dVwnvzYz1cfwKoM1AZk9zwrmEKHCK+nDC4ovv/FqoOfHf7w4+r1dfXXNpMkmmu321R2++3jRi2jN8+7unuI3/y23B6tVp/Jykivbm5pLV20YF41vCjc/B8gU+nGrUII8IZAwl5qVbrxBUKn0xaQiOROnf16pa8+/gqosNI8NDwPE0JIcHDcXKvV9nFUFNMMzbaADHZSbBhbKRDLspk0TR83m4d2ck6nxlMfCOHb1hw7UVz5h32bjp84vQCu4/b8fhvpp+9UAyYIBjwqqO0pnncW4etQkXnIbPjbp0fe+fvRz0vhUUm7Xy6nx/aZcsAqlp3l4Jw1MJ3riWDmIT/EcU76aM2XZcdOnH4KO7JdleV0MPNSUIC3VLyqsdntVXAalAqPRzzPU/+sOV7a3du3FJ6l31X5AgqLStvtjldAslnezBnjDcTm557u37rx13XGhHiLHGAQbBClT/xyZPuW5+rzZ+QMeLcNDY+wMN1tgscWAKmnHHDZiztywDn9aqzhpaelcHGxMRcgvHxTq9WckGO0en2ckJaSfBXM5L0Yna5qbDvM8Sknz5x/DB6fubNiCx2IEQc8LYFkn4E3TI2tv1hbRyUnJTJtHZ26xuaWQjlS6OzqQUc+P6YGd0yc/fryIl9jz138ZnFR4ZzDOBiB9h7ZTjaQxUN55W7NqMVigrEqIgxl3aOrP8nOSH8JTnF05px0lXbyThxUqCbTUUnR5dorRfD8HGzLU6LSEEmVIISIcJWGphYjHPKATgOZJx0wSHh+OAH39vUrhkdG82ANDnM/0YhdyqSqNMS9KeFSZ0zY7bSbOvEaWS9XaLIlvG3HazFKRtmoUauNMG9qwiVliAGUcNAC4SWVI2gvXf7ynqWwdF3Isox5Rk7WZw8uWXQVr1fF5nygh4HuJkK1jJFfWoD+ge24ctfrPLyAR2BtfY8mWn3jgZL5+/Pvzu52raHHqPsdgDdt30mRJFkF4dwKTx1U2ObcO7Pi4eUPvPvHt98nYb48pFQqVbDWpcMl4YLZ+R8s/f6CD9/681+Iltb2/bwgZHna2KgoEwjoyYLZeV/A5QC2Qr8qrVAonuc4boW3U4KbMZdqr2z+3ncLe2H+u9Bu6pplsVqJcBalQnEPHP7d0dm1FUSW5c2v1WZLPHn2wh4AvB4uv8SJCb+AYdhPfHlgh4NTXrveuBaiqOFwemhPAdWdYerqmQ2rqWJf/IBQUgbNQz/UaTVN4tQl+AaMULw/QA6Om6ZSsamRABjMjunrH0iQ4gWEhH1NIlA9EOcbMAmuX0D+HqKgKUqD+4S9IMwPoqV4gTYcieHwl5IADKE7L0jkcyDQQiQREYgxQ9K8IDHWQP5tWGKdiTx56AhQaQ8LUrygiQQekgtrsT4SALvgIPm8yJZw5ACeiLah/x8JT0SlQyNhhP53VBpNCDAJJEgokbtP+CUsfk6TyQstyy5QZNnwFKg0ijDAKATTkkSkJeozEQmRllswxDi8BOml3XYTIRIOnZeWdlpEpDgtt4uW5gUFa8NofLsJQzQ9eU4r0HBu8iIPFDxgiqZ6nTxv9NVZrWIdsIzmIyLSAoqL0ZqleFGxrENM79xM8dxhAHE67QFfqVFNtJqYnprcy/O8OZwp2psaCBQXqxuI1WnP+2rPzUznGaWin3BvinH6Bbx65fK9RkPcOe/BUYySWLZ4/hAcay1Wa1MkABblypXMK3wpWq3q925LMsYLJcVzW6H9IlCHZBIPSi+AXtfQ0v54b99ACdyMTU1OHFCxUXXQ9mlXT//1CIq0hOkpSZfWrHpwbUNz25MWqy0PpE5AnQnazgDhHXxthFeq1hdgG9AVGLQHCOd9jWLdDZwbMnX36CLHabnKEBvFfJWXk4E/nWYT7uR8v5jHui6qNCEFGJdRcQDeMsSKNoD3TtodnFMRKU7LI2UR4HksKCD8RcIu8svdkZeTuKdTfDs4g98nSln40YolHTRN9YfbhkF1cWLc4eWQ8PmgyO+gL7DjAfb7IhIM+nfCCdYYrxfuSjB0Ai9YjWV9EQgEML9q+eLdmekph2gFzROh3Jg1ATLoY4UlC4s6RQ+M/YpFlikEuF8af7HLHrVYH6q/0fRIb/8gTs4rwEsqmttMjL9BDy1ZaKEoshueOerxnAePHsvlOKfPF5+bmcbPzM3s43kBVFSwUyQpJBjieqGpFugQ0Fei/QYeaU2wYHu+BlPVBwX5ufgrfC7QXd82tuS2tHeu8jfIEKtrZRgl3tf1zS3bQ+/Cy/L5ksD72iAmOA6nNUBdYjV2RniObSC8vhlNNmBCtB383cYkqpemvaO7BKzML2DBLY2TIgA3YF7gYAzjZwB2PPgz7b+IW1/68Tj7G+9VucavX7tyygC7WHrz/WqrCL4rRqvJGmfK4kWbG4ZxLi9KIqlt3q51qmuKgf5DwaR2QgX49h2ecnZ83sqzTmw9G6K5PwQbxNEYvEjWOCQh4dvvHSmAxy7IZY6b6JhQxXaRrdJExKu0dAaCJG8lyyai0iRJhlylQ5qNU7Nss7+2aBWL92VYxRiX98qwtPobE6uNtole2hkqHkP2Pw+Yli0qaoDl8zlf8W/BzByLuBjHwYLgqU+M1+8DSQp3LA5itEJm+rQ2cZ4fkfj/iPBJGEtjcfF9TxgNsXWMUuGSSow2Wpg3d5YlNyP1HOHeUdP+9l8P3VTtHyz4zkczstLegn6ueRbGEWnJifyykqI2CCVPQdVlQuZ+SqnyXwEGAAK++B/P+uaYAAAAAElFTkSuQmCC)
+}
+</style>
+
+<!--[if lt IE 9]>
+<script src="http://res.xiami.net/??/static/js/lib/html5shiv.js"></script>
+<![endif]-->
+<script type="text/javascript" async="" id="tb-beacon-aplus"
+	exparams="category=&amp;userid=&amp;aplus&amp;member_auth=0"
+	src="http://a.tbcdn.cn/s/aplus_v2.js"></script>
+<script type="text/javascript">
+	navigator
+			.__defineGetter__(
+					'userAgent',
+					function() {
+						return 'Mozilla/5.0 (Linux; Android 4.1.1; Nexus 7 Build/JRO03D) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166  Safari/535.19';
+					});
+</script>
+<style>
+[touch-action="none"] {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+
+[touch-action="pan-x"] {
+	-ms-touch-action: pan-x;
+	touch-action: pan-x;
+}
+
+[touch-action="pan-y"] {
+	-ms-touch-action: pan-y;
+	touch-action: pan-y;
+}
+
+[touch-action="scroll"], [touch-action="pan-x pan-y"], [touch-action="pan-y pan-x"]
+	{
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+}
+</style>
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+	top: 18px !important;
+	left: 50% !important;
+	margin-left: -90px !important;
+	width: 180px !important;
+	border: 2px rgba(255, 255, 255, .38) solid !important;
+	border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+	margin-left: 0px !important;
+}
+</style>
+</head>
+<body data-spm="7218437">
+	<script type="text/javascript">
+		(function(d) {
+			var t = d.createElement("script");
+			t.type = "text/javascript";
+			t.async = true;
+			t.id = "tb-beacon-aplus";
+			t.setAttribute("exparams", "category=&userid=&aplus&member_auth=0");
+			t.src = ("https:" == d.location.protocol ? "https://s" : "http://a")
+					+ ".tbcdn.cn/s/aplus_v2.js";
+			d.getElementsByTagName("head")[0].appendChild(t);
+		})(document);
+	</script>
+
+	<header>
+		<h1>
+			<img class="logo" width="72"
+				src="data:image/png;base64,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">
+		</h1>
+		<p class="tit">虾米音乐</p>
+	</header>
+	<section class="apps">
+		<div class="apps-items">
+			<a href="http://um0.cn/UIE86X/" id="appstore" class="appurl" title="">
+				<div class="apps-detail ios">
+					<h2>
+						<b>iPhone</b>
+					</h2>
+					<p>最佳体验: iOS 6.0+</p>
+					<p>
+						<span>大小: 9.3M</span>
+					</p>
+					<b class="caret"></b>
+				</div>
+			</a>
+		</div>
+		<div class="apps-items">
+			<a href="//www.xiami.com/apps/download?type=android_index" id="aapp"
+				class="appurl" title="">
+				<div class="apps-detail android">
+					<h2>
+						<b>Android</b>
+					</h2>
+					<p>最佳体验: Android 4.0+</p>
+					<p>
+						<span>大小: 9.7M</span>
+					</p>
+					<b class="caret"></b>
+				</div>
+			</a>
+		</div>
+	</section>
+	<script>
+		var device = "android";
+
+		~(function(win, doc) {
+			var XM = {};
+			function getRequest(type) {
+				var url = location.search, theRequest = new Object();
+				if (url.indexOf("?") != -1 && type == false) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for (var i = 0; i < strs.length; i++) {
+						theRequest[strs[i].split("=")[0]] = unescape(strs[i]
+								.split("=")[1]);
+					}
+				} else if (url.indexOf("?") != -1 && type == true) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					theRequest["type"] = strs[0].split("=")[0];
+				}
+				return theRequest;
+			}
+
+			var req = new Object(), req = getRequest(false), ua = navigator['userAgent']['toLowerCase']
+					(), ref = req['ref'], irefurl = req['irefurl'], type = req['type'], arrive_id = req['arrive_id'], qqdown = 'http://a.app.qq.com/o/simple.jsp?pkgname=fm.xiami.main&g_f=991788', wxUA = ua
+					.match(/.*?(micromessenger\/([0-9.]+))\s*/), wbUA = ua
+					.match(/.*?(weibo\_\_([0-9.]+))\s*/);
+			if (device == 'android') {
+				var market = '//www.xiami.com/software/download?app=music_android';
+				if (ref && ref != '') {
+					market = '//www.xiami.com/apps/download?type=android_'
+							+ ref;
+					if (ref == 'kuaidi') {
+						market = 'http://res.xiami.net/download/spark_xiamikuaidi.apk';
+					}
+					document.getElementById('aapp').href = market;
+				}
+				if (ref != 'kuaidi') {
+					win.location = market;
+				}
+			} else {
+				var appstore = 'http://um0.cn/UIE86X/', sUrl = 'xiami://';
+				if (irefurl && irefurl != '') {
+					appstore = irefurl;
+					document.getElementById('appstore').href = appstore;
+				}
+				//Cooperation
+				if (ref == 'mmtour') {
+					sUrl = 'xiami://artist/81852';
+				}
+				if (arrive_id) {
+					if (type == "album") {
+						sUrl = 'xiami://album/' + arrive_id;
+					} else if (type == "artist") {
+						sUrl = 'xiami://artist/' + arrive_id;
+					} else if (type == "collect") {
+						sUrl = 'xiami://collect/' + arrive_id;
+					}
+				}
+				if (ref != 'kuaidi') {
+					win.location = sUrl;
+				}
+				var clickedAt = +new Date;
+				setTimeout(function() {
+					if (+new Date - clickedAt < 2000) {
+						win.location = appstore;
+					}
+				}, 200);
+			}
+
+			//判断在微信/微博打开
+			if (wxUA || wbUA) {
+				document.getElementById('aapp').href = qqdown;
+				document.getElementById('appstore').href = qqdown;
+			}
+
+		})(window, document);
+	</script>
+	<div id="cli_dialog"></div>
+</body>
+</html>

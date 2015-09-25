@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap > <!-- namespace="user" -->
+	<typeAlias alias="user" type="cjava.walker.ibatis.entity.User" />
+    <typeAlias alias="sex" type="cjava.walker.ibatis.entity.Sex" />
+<!--     <typeAlias alias="sexTypeHandler" type="cjava.walker.ibatis.SexTypeHandler" />  -->
+    <typeAlias alias="sexTypeHandlerCallback" type="cjava.walker.ibatis.SexTypeHandlerCallback" />
+	
+	<resultMap id="userMap" class="user">
+		<result column="id" property="id" jdbcType="INT" /> <!-- BIGINT -->
+		<result column="name" property="name" jdbcType="VARCHAR"  />
+		<!-- 首先注意的是 这里的typeHandler可以是 TypeHandler也可以是 TypeHandlerCallback 看看他们之间的关系就可以知道 还有ibatis会判断是什么类型的 dont worry about that -->
+		<!-- 还有一点就是 这里的typeHandler设置了 但是并不代表别的地方就不需要设置了  这里只是设置在了resultMap当中 就是说你在查询完之后 (使用select)将返回的结果转成你想要的类型 但是对于insert语句来说是没有影响的 看下面的insert语句的配置 -->
+		<result column="sex" property="sex" jdbcType="INT" javaType="sex" typeHandler="sexTypeHandlerCallback"/>
+		<result column="age" property="age" jdbcType="INT" />
+		<result column="group_id" property="groupId" jdbcType="BIGINT" />
+		<result column="add_time" property="addTime"  />
+	</resultMap>
+
+	<cacheModel id="oneDayCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute statement="insertUsers" />
+	</cacheModel>
+	
+	<sql id="whereClause">
+		<isNotNull property="name"> and name like '$%name%$'</isNotNull>
+		<isNotNull property="groupId"> and group_id = #groupId#</isNotNull>
+	</sql>
+
+	<!-- 获得全查询列表 -->
+	<select id="getAllUsers" resultMap="userMap">
+		select * from users
+	</select>
+
+	<select id="getAllUsersInRang" parameterClass="Map" resultMap="userMap" cacheModel="oneDayCache">
+		select * from users limit #firstResult# , #maxResults#
+	</select>
+
+	<select id="findByExample" parameterClass="user" resultClass="user">
+		select * from users where 1 = 1 
+		<isParameterPresent prepend="and"> <!-- open="(" close=")" -->
+			<include refid="whereClause" />
+		</isParameterPresent>
+		<isNotNull property="row.count"> limit 0,#row.count#</isNotNull>
+	</select>
+
+	<!-- 根据用户名获得用户对象 -->
+	<select id="getUsersByName" resultMap="userMap">
+		select * from users where	name=#value#
+	</select>
+	
+
+	<!-- 根据id获得用户对象 -->
+	<select id="getUsersById" resultMap="userMap">
+		select * from users where	id=#value#
+	</select>
+
+	<!--
+	         新增用户对象
+	         这里需要注意的是 (正如上面说道 insert语句中如果存在了枚举类型的话 需要设置/配置它所需要的typeHandler 因为select和insert语句所使用的 配置项不是在同一个地方 insert的话 需要在语句当中来指定 )
+	     tips :  在   InlineParameterMapParser.newParseMapping(String, Class, TypeHandlerFactory)方法中可以知道 语句中 可以使用 ","分隔来配置项resultMap中配置的东西 几乎是一样的
+	        jdbcType , javaType , handler(typeHandler)
+	        
+	        还有一点需要注意的是       
+	-->
+	<insert id="insertUsers" parameterClass="user">
+		insert into users
+				(id,name,age,sex,group_id,add_time) 
+			values 
+				(#id#,#name#,#age#,#sex,handler=sexTypeHandlerCallback#,#groupId#,#addTime#)
+		<selectKey keyProperty="id" resultClass="java.lang.Integer"> <!-- use  java.lang.Long if you want/need -->
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 删除用户对象 -->
+	<delete id="deleteUsers">
+		delete from users where id=#value#
+	</delete>
+	
+	<delete id="deleteUsersByIds" parameterClass="map">
+    	delete from users where 1 = 1      
+        <iterate prepend="and" property="users" open="("
+          close=")" conjunction="or">
+          id=$users[].id$
+        </iterate> 
+       
+  </delete>
+
+	<!-- 更新用户对象 -->
+	<delete id="updateUsers" parameterClass="user">
+		update users set name=#name# where id=#id#
+	</delete>
+	
+</sqlMap>

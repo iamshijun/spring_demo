@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+       "
+	  >
+	  
+	<context:annotation-config/>
+   
+   	<context:property-placeholder file-encoding="utf-8" location="classpath:test.properties"/>
+    <context:property-override    file-encoding="utf-8" location="classpath:override.properties"/>
+   
+   
+    <bean id="foo" name="${db.user}" class="com.foo.DefaultUserPreferences" >
+    	<property name="name" value="bar" />
+    </bean>
+	  
+	<bean id="defaultPreference" class="com.foo.DefaultUserPreferences">
+		<property name="name" value="defaultPreference"/>
+		<qualifier value="default"/>
+	</bean>  
+	
+    <bean class="com.foo.UserManager" />
+	
+</beans>

@@ -1,0 +1,147 @@
+<head>
+	
+</head>
+	<style>
+		.tr-test{
+			background-color:red;
+		}
+	</style>
+<script>
+	/** Event handler for mouse wheel event.
+		 *鼠标滚动事件
+		 */
+		var $ = document.getElementById;
+		var wheel = function(event) {
+			var delta = 0;
+			if (!event) /* For IE. */
+				event = window.event;
+			if (event.wheelDelta) { /* IE/Opera. */
+				delta = event.wheelDelta / 120;
+			} else if (event.detail) {
+				/** Mozilla case. */
+				/** In Mozilla, sign of delta is different than in IE.
+				 * Also, delta is multiple of 3.
+				 */
+				delta = -event.detail / 3;
+			}
+			/** If delta is nonzero, handle it.
+			 * Basically, delta is now positive if wheel was scrolled up,
+			 * and negative, if wheel was scrolled down.
+			 */
+			if (delta)
+				handle(delta);
+			/** Prevent default actions caused by mouse wheel.
+			 * That might be ugly, but we handle scrolls somehow
+			 * anyway, so don't bother here..
+			 */
+			if (event.preventDefault)
+				event.preventDefault();
+			event.returnValue = false;
+		}
+
+		/** Initialization code. 
+		 * If you use your own event management code, change it as required.
+		 */
+		if (window.addEventListener) {
+			/** DOMMouseScroll is for mozilla. */
+			window.addEventListener('DOMMouseScroll', wheel, false);
+		}
+		/** IE/Opera. */
+		window.onmousewheel = document.onmousewheel = wheel;
+
+		/** This is high-level function.
+		 * It must react to delta being more/less than zero.
+		 */
+		var handle = function(delta) {
+			var random_num = Math.floor((Math.random() * 100) + 50);
+			if (delta < 0) {
+				alert("鼠标滑轮向下滚动：" + delta + "次！" + random_num); // 1
+				//$("btn_next_pic").onclick(random_num);
+				return;
+			} else {
+				alert("鼠标滑轮向上滚动：" + delta + "次！" + random_num); // -1
+				//$("btn_last_pic").onclick(random_num);
+				return;
+			}
+		}
+
+
+
+
+
+	var Zero = function (){
+		//alert(arguments.callee.caller);
+		var userAgent = window.navigator.userAgent.toLowerCase().match(/msie|firefox|opera|safari/);
+		if(userAgent == 'msie'){
+			alert("arguments.callee.caller.arguments[0] == document");
+		}else{
+			alert("arguments.callee.caller.arguments[0] == window");
+		}
+	//	alert(userAgent)
+	}
+
+	var alr = function(){
+		alert(1)
+	}
+	var bind = function(dom){
+		var iframeElem = document.getElementById("ifr")
+		if(iframeElem.addEventListener){//
+			document.getElementById("spn").addEventListener("mouseover",alr,false)
+			iframeElem.addEventListener("load",function(){
+				//alert(iframeElem.contentWindow.parent == window);
+				if(!!iframeElem.contentWindow.document)
+					alert(iframeElem.contentWindow.document.body.innerHTML);
+			},false)
+		}else if(iframeElem.attachEvent){ //ie
+			document.getElementById("spn").attachEvent("onmouseover",alr)
+			iframeElem.attachEvent("onload",function(){
+				alert(iframeElem.contentWindow.document.body.innerHTML);
+			})
+		}
+		
+		setTimeout(function(){
+			document.getElementById("ifr").src = "include.html";
+		},1000)
+		//alert("iframeElem.contentWindow.parent == window : "  + (iframeElem.contentWindow.parent == window));
+
+		//alert(iframeElem.contentDocument); undefinied
+
+		//alert(iframeElem.contentWindow.document || iframeElem.contentDocument);
+
+		//document.write(iframeElem.contentWindow.document.body.innerHTML);
+
+		//var z = new Zero();
+	}
+
+	Zero.tabs = function(){
+		var model = function(){this.id = 11;}
+		alert(this);
+		if(this.constructor != model ){//首次进来的this是 Zero对象(function对象 和 new Zero()创建出来的不是同种意义的)
+			return new model();
+		}
+
+		return model;
+	}
+
+	
+	</script>
+<body onload="bind(this)">
+	<iframe id="ifr">
+		
+	</iframe>
+	<button  onclick="javascript:alert('you dare click on me?')">Click me</button>
+	<span class="red" id='spn'>red</span>
+	<div>
+		<style>.red{color:red}</style>
+	</div>
+	<div>
+		<table>
+			<tr class="tr-test">
+				<td>1</td>
+				<td>2</td>
+			</tr>
+		</table>
+	</div>
+	<button id="btn_last_pic" >Click and show num</button>
+	
+</body>

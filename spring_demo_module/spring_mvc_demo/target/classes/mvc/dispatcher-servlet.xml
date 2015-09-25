@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"
+	default-lazy-init="false">
+
+	<!--
+	            首先如果当前不用这个注解的话  而且又没有自定义 HandlerMapping HandlerApater...这些核心类的话 默认是会找DispatcherServlet.properties文件中声明的默认bean
+	          在spring 3.2之前           <mvc:annotation-driven />注解其实就为容器添加了 三个类 DefaultAnnotationHandlerMapping , AnnotationMethodHandlerAdapter , ConfigurableWebBindingInitializer
+	   而在现在 替换了 前两个  Mapping和Adapter 核心bean之外 还添加了几个bean  详细请看源码
+	 -->
+	<mvc:annotation-driven conversion-service="myConversionService">
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8"/>
+				<property name="supportedMediaTypes">
+					<list>
+						<value>*/*;charset=UTF-8</value>
+						<value>text/plain;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<context:component-scan base-package="feng.shi.controller">
+		<!-- 念の為 -->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<!--<context:component-scan base-package="feng.shi.component" /> -->
+	
+	<mvc:resources location="/WEB-INF/static/" mapping="/static/**" cache-period="28800" />
+	<!--	
+		 ResourceHttpRequestHandler中使用到 ,在匹配路径是得到的 match path (在request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE)中)
+		 e.g   .../static/js/main.js  那么 找资源文件的时候  在location指定路径下去查找!  
+	 -->
+
+
+	<import resource="deprecated_test.xml" />
+	<import resource="web1.xml" />
+	<import resource="web-common.xml" />
+
+	<bean id="myConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<ref local="stringToPhoneNumConverter"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="stringToPhoneNumConverter" class="feng.shi.controller.support.converter.StringToPhoneNumberConverter" />				
+	
+	<mvc:interceptors>
+		<ref local="stopWatchHandlerInterceptor"/>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/> <!-- include pattners ,can be multi configed-->
+			<mvc:exclude-mapping path="/fuck/*"/> <!-- exclude patterns -->
+			<ref local="myHandlerInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<bean id="myHandlerInterceptor" class="feng.shi.web.MyHandlerInterceptor" />
+	<bean id="stopWatchHandlerInterceptor" class="feng.shi.web.StopWatchHandlerInterceptor" />
+	
+	
+	<bean id="productRedirectController" name="/client/download/**"  class="feng.shi.controller.ProductRedirectController"  />
+	
+</beans>

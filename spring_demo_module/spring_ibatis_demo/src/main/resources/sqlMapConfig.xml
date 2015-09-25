@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig
+       PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+       "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" useStatementNamespaces="false"
+		statementCachingEnabled="true" classInfoCacheEnabled="true" />
+	
+<!--     <typeHandler javaType="cjava.walker.ibatis.entity.Sex" jdbcType="INT" callback="cjava.walker.ibatis.SexTypeHandlerCallback"/> ?? not work  -->
+
+	<sqlMap resource="cjava/walker/ibatis/maps/Group.xml" />
+	<sqlMap resource="cjava/walker/ibatis/maps/User.xml" />
+	
+</sqlMapConfig>

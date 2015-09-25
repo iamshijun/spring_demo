@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="user" type="cjava.walker.mybatis.entity.User" />
+		<typeAlias alias="sex" type="cjava.walker.mybatis.entity.Sex" />
+		
+		
+		<typeAlias alias="sexTypeHandler" type="cjava.walker.mybatis.SexTypeHandler" />
+	</typeAliases>
+	
+	<typeHandlers>
+		<typeHandler handler="sexTypeHandler" javaType="sex" jdbcType="INTEGER"/>
+	</typeHandlers>
+
+	<!-- <mappers> 
+			<mapper resource="com/ice/stat/online/model/hbm/EventFlagMapper.xml"/> 
+		</mappers>
+	 -->
+		
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql:///test?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF8" />
+				<property name="username" value="root" />
+				<property name="password" value="" />
+			</dataSource>
+		</environment>
+	</environments>
+</configuration>

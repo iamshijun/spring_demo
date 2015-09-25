@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation=
+	"http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	 http://www.springframework.org/schema/context
+	 http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+	 >
+
+  	<context:component-scan base-package="org.mybatis.spring.sample.dao" />
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="config.properties" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="url" value="${jdbc.url}" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:sqlMapConfig.xml" />
+		<property name="mapperLocations" value="classpath:cjava/walker/maps/*.xml"/>
+		<property name="dataSource" ref="dataSource" />
+		<property name="transactionFactory">
+		    <bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />
+		</property>
+	</bean>
+
+	<!-- 1. 直接使用 定义的Mapper类 忌口 , 注意这里设置的mapperInterface:UserMapper 需要是一个接口而不是实现类 看属性的名称其实可以知道的-->
+	<!-- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="org.mybatis.spring.sample.mapper.UserMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean> -->
+	
+	<!--  2. 使用sqlSession(SqlSessionTemplate) 注入到相应的dao(repository)中:e.g UserDaoImpl ，比一更灵活 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+  		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+	
+	<!--
+	          自动扫描指定目录下的所有接口,这样如果在有大量的像上述1的情况这样就方便了  (可以指定1) annotatedClass找到含有指定 注解的接口   .2) mapperInterface找父接口为mapperInterface的接口)
+	          这里不用设置 sqlSessionTemplate或者sqlSessionFactory,因为在生成Mapper的时候会自动装配
+	              另外如果这里使用了多个datasource的话 , 自动装配将不会生效,这里需要指定sqlSessionFactoryBeanName 或 sqlSessionTemplateBeanName 属性来设置正确的 bean名 称来使用 不是bean的引用
+	--> 
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.mybatis.spring.sample.mapper" />
+	</bean>
+
+
+</beans>

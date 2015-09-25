@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop         
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/context         
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	">
+	
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:/config.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!--<bean class="cjava.walker.support.JavaConfig" />-->
+	
+	<!-- 和 ResourceBundleMessageSource(使用的是java.util.ResourceBundle来实现/获取国际化信息资源文件)不同
+		 ReloadableResourceBundleMessageSource使用的是Properties + Locale 来获取资源文件的 , 另外因为后者实现了ResourceLoaderAware接口所以在运行时 容器会将当前使用的ResourceLoader赋值后后者
+		 这里是ServletContextResourceLoader(扩展了DefaultResourceLoader) 重载了父类方法getResourceByPath ,所以如果当前的 basenames没有设置classpath: 前缀的话 ，就会使用 servletContext.getResource(path)方法来获取
+		 即在 WEB-INF目录下去查找....
+	-->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" >
+		<property name="basenames" >
+			<list>	
+			<value>classpath:i18n/message</value>
+			</list>
+		</property>
+		<property name="cacheSeconds" value="60" />
+		<property name="fileEncodings" value="utf-8" />
+		<property name="useCodeAsDefaultMessage" value="true" />
+	</bean>
+	
+	<bean id="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+		<constructor-arg ref="messageSource"/>
+	</bean>
+	
+	
+</beans>
