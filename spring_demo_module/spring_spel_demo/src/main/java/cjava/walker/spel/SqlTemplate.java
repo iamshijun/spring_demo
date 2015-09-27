@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import org.springframework.context.expression.MapAccessor;
 import org.springframework.expression.AccessException;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
@@ -14,12 +13,10 @@ import org.springframework.expression.PropertyAccessor;
 import org.springframework.expression.TypedValue;
 import org.springframework.expression.common.TemplateParserContext;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.ReflectivePropertyAccessor;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.jdbc.core.SqlProvider;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
-
 
 public class SqlTemplate implements SqlProvider{
 	
@@ -89,9 +86,9 @@ public class SqlTemplate implements SqlProvider{
 
 		evaluationContext = new StandardEvaluationContext();
 
-		evaluationContext.addPropertyAccessor(new SqlTemplateAccessor());
-		evaluationContext.addPropertyAccessor(new ReflectivePropertyAccessor());
-		evaluationContext.addPropertyAccessor(new MapAccessor());
+		evaluationContext.addPropertyAccessor(SqlTemplateAccessor.INSTANCE);
+		//evaluationContext.addPropertyAccessor(new ReflectivePropertyAccessor());
+		//evaluationContext.addPropertyAccessor(new MapAccessor());
 
 		evaluationContext.registerFunction("isEmpty", ReflectionUtils.findMethod(StringUtils.class, "isEmpty",new Class[]{Object.class}));
 	}
@@ -103,46 +100,50 @@ public class SqlTemplate implements SqlProvider{
 	public Map<String, Object> getParams() {
 		return params;
 	}
-}
-
-class SqlTemplateAccessor implements PropertyAccessor{
-
-	@Override
-	public Class<?>[] getSpecificTargetClasses() {
-		return new Class<?>[]{SqlTemplate.class};
-	}
-
-	@Override
-	public boolean canRead(EvaluationContext context, Object target, String name)
-			throws AccessException {
-		return true;
-	}
-
-	@Override
-	public TypedValue read(EvaluationContext context, Object target, String name) throws AccessException {
-		SqlTemplate SqlTemplate = (SqlTemplate)target;
-		Object value = null;
-		if("table".equalsIgnoreCase(name)){
-			value = SqlTemplate.getTable();
-		}else{
-			value = SqlTemplate.getParams().get(name);
-			if(value == null){
-				return TypedValue.NULL;
-			}
-		}
-		return new TypedValue(value);
-	}
-
-	@Override
-	public boolean canWrite(EvaluationContext context, Object target, String name) throws AccessException {
-		return false;
-	}
-
-	@Override
-	public void write(EvaluationContext context, Object target, String name, Object newValue) throws AccessException {
-		//throw new UnsupportedOperationException("write is not support in SqlTemplateAccessor");
-		throw new AccessException("properties in SqlExpression are read-only");
-	}
 	
-}
 
+	private static class SqlTemplateAccessor implements PropertyAccessor{
+
+		public final static SqlTemplateAccessor INSTANCE = new SqlTemplateAccessor(); 
+		
+		@Override
+		public Class<?>[] getSpecificTargetClasses() {
+			return new Class<?>[]{SqlTemplate.class};
+		}
+	
+		@Override
+		public boolean canRead(EvaluationContext context, Object target, String name)
+				throws AccessException {
+			return true;
+		}
+	
+		@Override
+		public TypedValue read(EvaluationContext context, Object target, String name) throws AccessException {
+			SqlTemplate SqlTemplate = (SqlTemplate)target;
+			Object value = null;
+			if("table".equalsIgnoreCase(name)){
+				value = SqlTemplate.getTable();
+			}else{
+				value = SqlTemplate.getParams().get(name);
+				if(value == null){
+					return TypedValue.NULL;
+				}
+			}
+			return new TypedValue(value);
+		}
+	
+		@Override
+		public boolean canWrite(EvaluationContext context, Object target, String name) throws AccessException {
+			return false;
+		}
+	
+		@Override
+		public void write(EvaluationContext context, Object target, String name, Object newValue) throws AccessException {
+			//throw new UnsupportedOperationException("write is not support in SqlTemplateAccessor");
+			throw new AccessException("properties in SqlExpression are read-only");
+		}
+		
+	}
+
+
+}

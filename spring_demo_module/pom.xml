@@ -19,6 +19,7 @@
 		<module>spring_ibatis_demo</module>
 		<module>spring_mybatis_demo</module>
 		<module>spring_jpa_demo</module>
+		<module>spring_jdbc_memo</module>
 	</modules>
 	
 	<dependencies>
