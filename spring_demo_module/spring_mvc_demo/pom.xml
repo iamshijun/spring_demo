@@ -79,6 +79,13 @@
 			<version>1.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.185</version>
+		</dependency>
+				
+
 		<!-- JSR -->
 		<dependency>
 			<groupId>javax.inject</groupId>

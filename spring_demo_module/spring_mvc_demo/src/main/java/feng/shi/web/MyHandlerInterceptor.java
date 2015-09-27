@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +27,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.mvc.AbstractController;
 import org.springframework.web.servlet.mvc.Controller;
-import org.springframework.web.servlet.mvc.method.annotation.PathVariableMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 import org.springframework.web.util.UrlPathHelper;
@@ -37,7 +35,7 @@ import feng.shi.support.AccessAuth;
 
 public class MyHandlerInterceptor extends HandlerInterceptorAdapter implements BeanPostProcessor{
 	
-	private Logger logger = LoggerFactory.getLogger("Ablesky_Auth_Access");
+	private Logger logger = LoggerFactory.getLogger("Auth_Access");
 	
 	private static final String AC_HANDLER_METHOD_NAME = "handleRequestInternal";
 	

@@ -14,8 +14,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ComponentScan(basePackages = {
-		"com.savdev.springmvcexample.repository", 
-		"com.savdev.springmvcexample.config"
+		//"feng.shi.repository.**.impl", 
+		"feng.shi.repository.impl", 
+		"feng.shi.component", 
+		"feng.shi.service.impl", 
+		"feng.shi.config"
 	}
 )
 @EnableTransactionManagement
