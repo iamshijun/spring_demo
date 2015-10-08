@@ -34,6 +34,11 @@ public class BServiceImpl implements BService {
 			TimeUnit.SECONDS.sleep((int)(Math.random() * 5));
 		} catch (InterruptedException ignore) {
 		}
-		return new AsyncResult<String>("Here we go");
+		return new AsyncResult<String>("Here we go in bService");
+	}
+	
+	
+	public Future<String> doWithOtherBeanWithAsync(){
+		return aService.doAsync();
 	}
 }

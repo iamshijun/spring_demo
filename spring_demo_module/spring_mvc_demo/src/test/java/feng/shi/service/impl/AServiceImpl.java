@@ -1,11 +1,13 @@
 package feng.shi.service.impl;
 
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import feng.shi.service.AService;
@@ -27,9 +29,13 @@ public class AServiceImpl implements AService {
 	}
 
 	@Override
-//	@Async
+	@Async
 	public Future<String> doAsync() { // dummy
-		return null;
+		try {
+			TimeUnit.SECONDS.sleep(5);
+		} catch (InterruptedException ignore) {
+		}
+		return new AsyncResult<String>("Here we go in aService");
 	}
 	
 	
