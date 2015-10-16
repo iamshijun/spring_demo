@@ -1,10 +1,10 @@
-package footmark.springdata.jpa.service;
+package com.kibo.springdata.jpa.service;
 
 import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-import footmark.springdata.jpa.domain.AccountInfo;
+import com.kibo.springdata.jpa.domain.AccountInfo;
 
 public interface UserService {
     public AccountInfo createNewAccount(String username, String password, Integer initBalance);

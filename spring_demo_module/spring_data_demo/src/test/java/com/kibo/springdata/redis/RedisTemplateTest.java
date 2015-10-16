@@ -1,8 +1,10 @@
-package redis;
+package com.kibo.springdata.redis;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import javax.annotation.Resource;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,8 +18,12 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SetOperations;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -31,6 +37,14 @@ public class RedisTemplateTest {
 	
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
+	@Resource(name="redisTemplate")
+	private ValueOperations<String, String> valueOps;
+	@Resource(name="redisTemplate")
+	private ListOperations/*<K, V>*/ listOps;
+	@Resource(name="redisTemplate")
+	private SetOperations/*<K, V>*/ setOps;
+	@Resource(name="redisTemplate")
+	private ZSetOperations/*<K, V>*/ zSetOps;
 	
 	@Autowired
 	private	JedisShardInfo shardInfo;

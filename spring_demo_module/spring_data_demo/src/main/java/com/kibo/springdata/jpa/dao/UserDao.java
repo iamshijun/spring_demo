@@ -1,10 +1,10 @@
-package footmark.springdata.jpa.dao;
+package com.kibo.springdata.jpa.dao;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.Repository;
 
-import footmark.springdata.jpa.domain.AccountInfo;
+import com.kibo.springdata.jpa.domain.AccountInfo;
 
 public interface UserDao extends Repository<AccountInfo, Long> {
 	

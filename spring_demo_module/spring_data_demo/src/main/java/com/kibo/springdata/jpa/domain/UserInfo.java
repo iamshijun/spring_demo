@@ -1,4 +1,4 @@
-package footmark.springdata.jpa.domain;
+package com.kibo.springdata.jpa.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;

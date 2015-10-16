@@ -58,9 +58,6 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
-	
-			
-
 		<!-- commons -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -152,8 +149,6 @@
 	        <artifactId>jackson-annotations</artifactId>
 	        <version>${jackson.version}</version>
 	    </dependency>
-	    
-				
 	</dependencies>
 
 	<build>

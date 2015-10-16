@@ -1,15 +1,17 @@
-package footmark.springdata.jpa.service;
+package com.kibo.springdata.jpa.service.impl;
 
-import footmark.springdata.jpa.dao.UserDao;
-import footmark.springdata.jpa.domain.AccountInfo;
-import footmark.springdata.jpa.domain.UserInfo;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.kibo.springdata.jpa.dao.UserDao;
+import com.kibo.springdata.jpa.domain.AccountInfo;
+import com.kibo.springdata.jpa.domain.UserInfo;
+import com.kibo.springdata.jpa.service.UserService;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
