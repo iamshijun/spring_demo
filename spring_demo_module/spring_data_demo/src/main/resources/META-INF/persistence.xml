@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 	<persistence-unit name="spring_data_demo" transaction-type="RESOURCE_LOCAL">
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<!-- <properties>
+		<!-- 下属信息都可以在spring中配置 -->
+		<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider>
+		 <properties>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/test"/>
 			<property name="hibernate.connection.username" value="root"/>
@@ -12,7 +13,8 @@
 			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.use_sql_comments" value="false"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
-		</properties> -->
+		</properties>  -->
+		<!--
 		<properties>
 			<property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
 			<property name="hibernate.connection.url" value="jdbc:h2:mem:test"/>
@@ -24,5 +26,6 @@
 			<property name="hibernate.use_sql_comments" value="false"/>
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 		</properties> 
+		-->
 	</persistence-unit>
 </persistence>

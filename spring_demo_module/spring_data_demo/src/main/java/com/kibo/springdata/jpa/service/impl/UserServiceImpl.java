@@ -1,7 +1,5 @@
 package com.kibo.springdata.jpa.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,8 +36,9 @@ public class UserServiceImpl implements UserService {
         return userDao.findByAccountId(id);
     }
 
-    public List<AccountInfo> findByBalanceGreaterThan(Integer balance,Pageable pageable){
-        Page<AccountInfo> accounts = userDao.findByBalanceGreaterThan(balance,pageable);
-        return accounts.getContent();
+    public Page<AccountInfo> findByBalanceGreaterThan(Integer balance,Pageable pageable){
+    	return userDao.findByBalanceGreaterThan(balance,pageable);
+//        Page<AccountInfo> accounts = userDao.findByBalanceGreaterThan(balance,pageable);
+//        return accounts.getContent(); //List
     }
 }

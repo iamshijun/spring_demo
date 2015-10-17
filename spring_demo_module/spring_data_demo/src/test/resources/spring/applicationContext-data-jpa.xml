@@ -20,9 +20,12 @@
 	</bean>
 
 	
-	<!-- ps Jpa default configuration path : classpath:META-INF/persistence.xml(add depends-on="dataSource" ) if use DefaultPersistenceUnitManager / if no datasource property was set -->
 	<bean id="entityManagerFactory"	class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
 		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="persistenceUnitName" value="spring_data_demo"/> 
+		<property name="persistenceProvider">
+			<bean class="org.hibernate.ejb.HibernatePersistence" />
+		</property> -->
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<!-- generateDdl : will automatically update the schema to match the declared models at startup -->
@@ -30,6 +33,8 @@
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
+		<!-- merge into jpaPropertyMap -->
+		<property name="jpaProperties" ref="persistenceProperties" />
 	</bean> 
 	
 	
@@ -41,12 +46,16 @@
 				org.springframework.jdbc.datasource.embedded.H2EmbeddedDatabaseConfigurer 
 			</property> -->
 		</bean>
+		<bean id="persistenceProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+			<property name="fileEncoding" value="utf-8" />
+			<property name="location" value="classpath:persistence_dev.properties" />
+		</bean>
 	</beans>
 	<beans profile="product">
 		<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">  
 	        <property name="driverClass" value="com.mysql.jdbc.Driver" />  
 	        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/test" />  
-	        <property name="username" value="sa" />  
+	        <property name="username" value="root" />  
 	        <property name="password" value="mysqlpwd1" />  
 	        <property name="idleConnectionTestPeriod" value="60" /> <!-- 检查数据库连接池中空闲连接的间隔时间，单位是分，默认值：240，如果要取消则设置为0 -->  
 	        <property name="idleMaxAgeInMinutes" value="240" /> <!-- 连接池中未使用的链接最大存活时间，单位是分，默认值：60，如果要永远存活设置为0 -->  
@@ -58,5 +67,9 @@
 	        <!-- 每个分区释放链接助理进程的数量，默认值：3，除非你的一个数据库连接的时间内做了很多工作，不然过多的助理进程会影响你的性能 -->  
 	        <property name="releaseHelperThreads" value="3" />  
 	    </bean> 
+	    <bean id="persistenceProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+			<property name="fileEncoding" value="utf-8" />
+			<property name="location" value="classpath:persistence.properties" />
+		</bean>
 	</beans>
 </beans>
