@@ -53,9 +53,10 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import cjava.walker.common.repository.GroupRepository;
-import cjava.walker.common.service.BookingService;
-import cjava.walker.common.service.FooService;
+import cjava.walker.common.service.IBookingService;
 import cjava.walker.common.service.JobService;
+import cjava.walker.common.service.impl.BookingService;
+import cjava.walker.common.service.impl.FooService;
 import cjava.walker.support.JobFinishEvent;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -68,7 +69,7 @@ import cjava.walker.support.JobFinishEvent;
 public class SpringFeatureTest {
 
 	@Autowired/*(required=false)*/ 
-	private BookingService bookingService;
+	private IBookingService bookingService;
 	
 	@Autowired
 	private cjava.walker.common.Configuration config;
@@ -138,8 +139,12 @@ public class SpringFeatureTest {
 
 		jobService.doLongTermJob();
 		
+		
+		System.out.println("LongTermJob ready  , now : " + System.nanoTime());
 		Future<Integer> future = jobService.doLongTermJobAndReturn(41);
-		System.out.println(future.get());
+		System.out.println("LongTermJob return , now : " + System.nanoTime());
+		
+		System.out.println("LongTermJob Result : " + future.get() + " , now : " + System.nanoTime());
 		
 		latch.await();
 		//TimeUnit.MINUTES.sleep(1);
@@ -225,10 +230,10 @@ public class SpringFeatureTest {
 		String driverClass;
 	     ....*/
 		
-		@Bean/*(autowire=Autowire.BY_TYPE)*/
-		BookingService bookingService() {
+		/*@Bean(autowire=Autowire.BY_TYPE)
+		IBookingService bookingService() {
 			return new BookingService();
-		}
+		}*/
 
 		@Bean
 		JdbcTemplate jdbcTemplate(DataSource dataSource) {// 这里的参数名称必须和方法名称一样.!

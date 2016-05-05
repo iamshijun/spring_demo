@@ -7,6 +7,7 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.BridgeMethodResolver;
+import org.springframework.dao.DeadlockLoserDataAccessException;
 
 import cjava.walker.annotation.DeadlockRetry;
 
@@ -43,8 +44,8 @@ public class DeadlockRetryMethodInterceptor implements MethodInterceptor {
 		int maxTries = dlRetryAnnotation.maxTries();
 		int tryIntervalMillis = dlRetryAnnotation.tryIntervalMillis();
 		LOGGER.info(String.format("maxTries : %s ,tryIntervalMillis : %s", maxTries, tryIntervalMillis));
-		return invocation.proceed();
-		/*for (int i = 0; i < maxTries; i++) {
+		//return invocation.proceed();
+		for (int i = 0; i < maxTries; i++) {
 			try {
 				LOGGER.info("Attempting to invoke " + invocation.getMethod().getName());
 				Object result = invocation.proceed(); // retry
@@ -52,10 +53,8 @@ public class DeadlockRetryMethodInterceptor implements MethodInterceptor {
 				return result;
 			} catch (Throwable e) {
 				Throwable cause = e;
-
 				//... put the logic to identify DeadlockLoserDataAccessException or LockAcquisitionException
 				//...in the cause. If the execption is not due to deadlock, throw an exception 
-
 				if (tryIntervalMillis > 0) {
 					try {
 						Thread.sleep(tryIntervalMillis);
@@ -63,14 +62,22 @@ public class DeadlockRetryMethodInterceptor implements MethodInterceptor {
 						LOGGER.warn("Deadlock retry thread interrupted", ie);
 					}
 				}
-
+				if(cause instanceof DeadlockLoserDataAccessException){
+					//如果是死锁异常 重试 | 超过最大可重试次数 抛出异常
+					if(i == maxTries - 1){
+						//gets here only when all attempts have failed
+						throw new RuntimeException("DeadlockRetryMethodInterceptor failed to successfully execute target "
+								+ " due to deadlock in all retry attempts", new DeadlockLoserDataAccessException(
+								"Created by DeadlockRetryMethodInterceptor", null));
+					}else{
+						continue;
+					}
+				}else{
+					throw cause;
+				}
 			}
 
-			//gets here only when all attempts have failed
-			throw new RuntimeException("DeadlockRetryMethodInterceptor failed to successfully execute target "
-					+ " due to deadlock in all retry attempts", new DeadlockLoserDataAccessException(
-					"Created by DeadlockRetryMethodInterceptor", null));
 		}
-		return null;*/
+		return null;
 	}
 }

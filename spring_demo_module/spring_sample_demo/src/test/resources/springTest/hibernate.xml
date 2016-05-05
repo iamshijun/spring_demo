@@ -91,7 +91,7 @@
 	
 	<!-- ///////////////////////////////////////////////////////////////////////////// -->
 	
-	<!-- <bean id="deadlockRetryPointcut" class="org.springframework.aop.support.annotation.AnnotationMatchingPointcut">
+	<bean id="deadlockRetryPointcut" class="org.springframework.aop.support.annotation.AnnotationMatchingPointcut">
             <constructor-arg ><null/></constructor-arg>
             <constructor-arg value="cjava.walker.DeadlockRetry" />
     </bean>
@@ -101,5 +101,5 @@
     <bean id="myAppDeadlockRetryPointcutAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
             <constructor-arg ref="deadlockRetryPointcut" />
             <constructor-arg ref="deadlockRetryMethodInterceptor" />        
-    </bean> -->
+    </bean>
 </beans>

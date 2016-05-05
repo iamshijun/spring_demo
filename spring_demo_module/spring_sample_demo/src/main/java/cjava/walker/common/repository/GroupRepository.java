@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cjava.walker.annotation.DeadlockRetry;
 import cjava.walker.entity.Group;
 
-@Repository
+@Repository("groupRepository")
 public class GroupRepository implements BaseRepository<Group,Long>{
 
 	private HibernateTemplate hibernateTemplate;

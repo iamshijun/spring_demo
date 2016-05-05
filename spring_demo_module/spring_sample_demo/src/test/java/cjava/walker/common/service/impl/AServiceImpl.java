@@ -10,7 +10,7 @@ import cjava.walker.common.service.AService;
 import cjava.walker.common.service.BService;
 import cjava.walker.support.BeanSelfAware;
 
-@Service
+//@Service
 public class AServiceImpl implements AService, BeanSelfAware {// 此处省略Aservice接口定义
 	@Autowired
 	private BService bService; // ① 通过@Autowired方式注入BService

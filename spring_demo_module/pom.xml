@@ -20,6 +20,7 @@
 		<module>spring_mybatis_demo</module>
 		
 		<module>spring_jdbc_memo</module>
+		<module>spring_aop_demo</module>
 	</modules>
 	
 	<dependencies>

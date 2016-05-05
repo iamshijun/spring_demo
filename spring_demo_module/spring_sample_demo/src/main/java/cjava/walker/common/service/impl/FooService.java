@@ -1,4 +1,4 @@
-package cjava.walker.common.service;
+package cjava.walker.common.service.impl;
 
 import org.springframework.stereotype.Service;
 

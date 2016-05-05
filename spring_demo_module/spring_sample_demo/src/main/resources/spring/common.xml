@@ -19,6 +19,19 @@
 		</property>
 	</bean>
 	
+	
+	<context:component-scan base-package="cjava.walker.common.repository" >
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+    </context:component-scan>
+        
+<!--     <context:component-scan base-package="cjava.walker.common.service.**.impl"> -->
+    <context:component-scan base-package="cjava.walker.common.service">
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>  
+    
+<!--  <bean class="cjava.walker.common.adivce.SystemArchitecture" />   -->
+    
 	<!--<bean class="cjava.walker.support.JavaConfig" />-->
 	
 	<!-- 和 ResourceBundleMessageSource(使用的是java.util.ResourceBundle来实现/获取国际化信息资源文件)不同

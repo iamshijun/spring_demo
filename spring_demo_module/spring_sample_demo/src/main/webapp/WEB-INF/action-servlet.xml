@@ -14,9 +14,8 @@
            http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
 	default-lazy-init="false">
 
-	<context:component-scan base-package="cjava.walker.common.controller" />
-	<context:component-scan base-package="cjava.walker.common.repository" />
-
+	<context:component-scan base-package="cjava.walker.web.controller" />
+	
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"

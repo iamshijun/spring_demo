@@ -1,4 +1,4 @@
-package cjava.walker.common.controller;
+package cjava.walker.web.controller;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

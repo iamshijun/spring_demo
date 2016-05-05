@@ -1,4 +1,4 @@
-package cjava.walker.common.controller;
+package cjava.walker.web.controller;
 
 import java.util.Locale;
 

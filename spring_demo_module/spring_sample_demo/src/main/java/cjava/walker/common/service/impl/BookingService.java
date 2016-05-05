@@ -1,28 +1,39 @@
-package cjava.walker.common.service;
+package cjava.walker.common.service.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-//@Service | optianal :choose creat in @Configuration
-public class BookingService {
+import cjava.walker.common.service.IBookingService;
 
+@Service // optianal :choose creat in @Configuration
+public class BookingService implements IBookingService {
+
+	private Logger Logger = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	/**
-	 * 给spring的Autowire byType byName使用(如果没有@Autowired的话 需要setter,spring不会直接设置Field,只会通过setter) ,以及测试
-	 * @param jdbcTemplate
+	/* (non-Javadoc)
+	 * @see cjava.walker.common.service.impl.IBookingService#setJdbcTemplate(org.springframework.jdbc.core.JdbcTemplate)
 	 */
+	@Override
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
+	/* (non-Javadoc)
+	 * @see cjava.walker.common.service.impl.IBookingService#book(java.lang.String)
+	 */
+	@Override
 	@Transactional
 	public void book(String... persons) {
 		for (String person : persons) {
@@ -32,7 +43,13 @@ public class BookingService {
 		}
 	};
 
+	/* (non-Javadoc)
+	 * @see cjava.walker.common.service.impl.IBookingService#findAllBookings()
+	 */
+	@Override
+	@Transactional(readOnly=true)
 	public List<String> findAllBookings() {
+		this.dummy();
 		return jdbcTemplate.query("select FIRST_NAME from BOOKINGS",
 				new RowMapper<String>() {
 					@Override
@@ -43,4 +60,8 @@ public class BookingService {
 				});
 	}
 
+	
+	public void dummy(){
+		Logger.info("dummy");
+	}
 }

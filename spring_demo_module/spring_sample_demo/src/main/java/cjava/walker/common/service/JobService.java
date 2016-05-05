@@ -2,24 +2,28 @@ package cjava.walker.common.service;
 
 import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import cjava.walker.support.JobFinishEvent;
 
-@Component
+@Service
 public class JobService {
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private ApplicationEventMulticaster eventMulticaster;
 
 	@Scheduled(initialDelay = 1000, fixedRate = 5000)
 	public void doPerid(){
-		System.out.println("Hello" + System.currentTimeMillis());
+		logger.info("Hello ^_^ : " + System.currentTimeMillis());
 	}
 	
 	@Async
