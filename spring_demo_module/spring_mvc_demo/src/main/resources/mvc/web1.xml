@@ -50,8 +50,6 @@
 		http://localhost:9080/springmvc-chapter4/user/delete  ==> delete功能处理方法名。
 	 -->
 	
-	<bean id="userService" class="feng.shi.service.impl.UserServiceImpl"/>
-	   
 	<!-- MultiActionController  -->
    <bean name="/user/**" class="feng.shi.controller.UserController">
        <property name="userService" ref="userService"/>

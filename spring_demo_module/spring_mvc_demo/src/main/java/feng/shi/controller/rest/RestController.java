@@ -30,7 +30,7 @@ public class RestController {
 		System.out.println("Hello " + name);
 		return "index";
 	}
-
+	
 	@ResponseBody
 	@RequestMapping(value = "/course/{cId}",method= RequestMethod.POST)
 	public String modifyCourse(@PathVariable Long cId,String title,String content){
@@ -40,7 +40,7 @@ public class RestController {
 		return "failed";
 	}
 	@RequestMapping(value = "/course/{cId}",method= RequestMethod.GET)
-	public String courseInfo(@PathVariable Long cId){
+	public String courseInfo(@PathVariable Long cId,Integer appendix){//index appendix 不给定会报错, 对于非primitive类型 可以给定""空字符串 e.g /course/1?appendix=  
 		return "index";
 	}
 	

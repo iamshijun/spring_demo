@@ -109,20 +109,22 @@
     </bean>
     
     
+    
     <!-- tx:advice会生成一个 TransactionInterceptor (advice), 其中的 TransactionAttributeSource实现为NameMatchTransactionAttributeSource -->
-	<tx:advice id="tx-advice">
+	<!-- <tx:advice id="tx-advice">
 	    <tx:attributes>
 	        <tx:method name="*" propagation="REQUIRED"/>
 	    </tx:attributes>
-	</tx:advice>
+	</tx:advice> -->
 	
 	<bean class="cjava.walker.common.adivce.TestPointcutAdvice" id="testPointcutAdvice"/>
 	
     <aop:config>
-<!-- 	    <aop:advisor pointcut="cjava.walker.common.adivce.SystemArchitecture.businessService()" advice-ref="tx-advice"/> -->
 	    <aop:advisor pointcut="cjava.walker.common.adivce.SystemArchitecture.businessService()" advice-ref="testPointcutAdvice"/>
 	</aop:config>
 	
+    
+<!--     <tx:annotation-driven transaction-manager="transactionManager" mode="aspectj" proxy-target-class="true"/> -->
     
     <!--<bean id="testRepository" class="cjava.walker.common.repository.TestRepository">
     	<property name="hibernateTemplate" ref="hibernateTemplate" />

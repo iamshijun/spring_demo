@@ -1,5 +1,6 @@
 package cjava.walker;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.aop.Advisor;
@@ -31,8 +32,10 @@ public class Bootstrap {
 		IBookingService bookingService = applicationContext.getBean(IBookingService.class);
 		bookingService.findAllBookings();
 		
-//		Object bookingService = applicationContext.getBean("bookingService");
-//		System.out.println(Arrays.toString(bookingService.getClass().getInterfaces()));
+		//bookingService.dummy();
+		
+		Object bs = applicationContext.getBean("bookingService");
+		System.out.println(Arrays.toString(bs.getClass().getInterfaces()));
 		
 	}
 }

@@ -14,9 +14,6 @@
            http://www.springframework.org/schema/aop/spring-aop-3.2.xsd"
 	default-lazy-init="false">
 
-	<context:component-scan base-package="feng.shi.controller" />
-	<!--<context:component-scan base-package="feng.shi.component" /> -->
-
 	<!--   -->
 	<bean name="/helloCache" class="feng.shi.controller.CacheController">
 		<property name="cacheSeconds" value="30" />

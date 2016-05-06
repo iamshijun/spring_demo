@@ -46,11 +46,6 @@
 		 e.g   .../static/js/main.js  那么 找资源文件的时候  在location指定路径下去查找!  
 	 -->
 
-
-	<import resource="deprecated_test.xml" />
-	<import resource="web1.xml" />
-	<import resource="web-common.xml" />
-
 	<bean id="myConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
@@ -75,5 +70,10 @@
 	
 	
 	<bean id="productRedirectController" name="/client/download/**"  class="feng.shi.controller.ProductRedirectController"  />
+	
+	
+	<import resource="web1.xml" />
+	<import resource="web-common.xml" />
+	<import resource="deprecated-servlet.xml" />
 	
 </beans>

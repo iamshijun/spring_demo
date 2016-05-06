@@ -20,6 +20,7 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
+	<bean id="userService" class="feng.shi.service.impl.UserServiceImpl"/>
 	
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<qualifier  value="i18n"/>
@@ -28,5 +29,12 @@
 		<property name="fileEncodings" value="utf-8" />
 		<property name="cacheSeconds" value="60" />
 	</bean>
-
+	
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+	    <property name="customEditors">
+	        <map>
+	            <entry key="feng.shi.model.ExoticType" value="feng.shi.model.ExoticTypeEditor"/>
+	        </map>
+	    </property>
+	</bean>
 </beans>

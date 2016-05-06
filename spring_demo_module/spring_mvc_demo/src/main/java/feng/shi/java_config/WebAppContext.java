@@ -1,6 +1,8 @@
 package feng.shi.java_config;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +17,13 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration 
 @EnableWebMvc  //Add this annotation to an @Configuration class to have the Spring MVC configuration defined in
-//@EnableWebMVC需要和@Configuration 结合使用   又正如和@WebAppConfiguration需要和@Configuration结合使用一样 具体的流程remain  XXX
+//注意 @EnableWebMVC需要和@Configuration 结合使用   又正如和@WebAppConfiguration需要和@Configuration结合使用一样 具体的流程remain  XXX
 @ComponentScan(basePackages = { "feng.shi.controller" })
 public class WebAppContext {
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
+	
 
 	@Bean
 	MyWebConfigurer myWebConfigurer(){

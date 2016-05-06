@@ -22,19 +22,16 @@ public class BookingService implements IBookingService {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	/* (non-Javadoc)
-	 * @see cjava.walker.common.service.impl.IBookingService#setJdbcTemplate(org.springframework.jdbc.core.JdbcTemplate)
+	
+	/**
+	 * 给spring的Autowire byType byName使用(如果没有@Autowired的话 需要setter,spring不会直接设置Field,只会通过setter) ,以及测试
+	 * @param jdbcTemplate
 	 */
-	@Override
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	/* (non-Javadoc)
-	 * @see cjava.walker.common.service.impl.IBookingService#book(java.lang.String)
-	 */
-	@Override
-	@Transactional
+	@Override	@Transactional
 	public void book(String... persons) {
 		for (String person : persons) {
 			System.out.println("Booking " + person + " in a seat...");
@@ -43,11 +40,8 @@ public class BookingService implements IBookingService {
 		}
 	};
 
-	/* (non-Javadoc)
-	 * @see cjava.walker.common.service.impl.IBookingService#findAllBookings()
-	 */
-	@Override
-	@Transactional(readOnly=true)
+	
+	@Override	@Transactional(readOnly=true)
 	public List<String> findAllBookings() {
 		this.dummy();
 		return jdbcTemplate.query("select FIRST_NAME from BOOKINGS",
