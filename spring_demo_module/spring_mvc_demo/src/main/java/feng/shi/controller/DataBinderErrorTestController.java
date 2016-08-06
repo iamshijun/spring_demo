@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import feng.shi.model.DataBinderTestModel;
-import feng.shi.model.PhoneNumberEditor;
 import feng.shi.model.PhoneNumberModel;
+import feng.shi.model.PhoneNumberModelEditor;
 
 @SuppressWarnings("deprecation")
 public class DataBinderErrorTestController extends SimpleFormController {
@@ -44,6 +44,6 @@ public class DataBinderErrorTestController extends SimpleFormController {
               binder.registerCustomEditor(Date.class, dateEditor);
              
               //自定义的电话号码编辑器
-              binder.registerCustomEditor(PhoneNumberModel.class, new PhoneNumberEditor());
+              binder.registerCustomEditor(PhoneNumberModel.class, new PhoneNumberModelEditor());
        }
 }

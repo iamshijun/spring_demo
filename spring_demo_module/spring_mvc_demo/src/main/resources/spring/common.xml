@@ -37,4 +37,14 @@
 	        </map>
 	    </property>
 	</bean>
+	
+	<bean id="myConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<ref local="stringToPhoneNumConverter"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="stringToPhoneNumConverter" class="feng.shi.controller.support.converter.StringToPhoneNumberConverter" />				
 </beans>

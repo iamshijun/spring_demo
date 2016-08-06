@@ -1,26 +1,24 @@
-package feng.shi.model;
+package cjava.walker.entity;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
-public class PhoneNumberModel {
+public class PhoneNumber{
 	
 	private String areaCode;// ÇøºÅ
 	private String phoneNumber;// µç»°ºÅÂë
-	
-	
-	public PhoneNumberModel() {
-		super();
-	}
-
-	public PhoneNumberModel(String areaCode, String phoneNumber) {
-		super();
-		this.areaCode = areaCode;
-		this.phoneNumber = phoneNumber;
-	}
 
 	public String getAreaCode() {
 		return areaCode;
+	}
+	
+	public PhoneNumber(){}
+	
+	
+	public PhoneNumber(String areaCode, String phoneNumber) {
+		super();
+		this.areaCode = areaCode;
+		this.phoneNumber = phoneNumber;
 	}
 
 	public void setAreaCode(String areaCode) {

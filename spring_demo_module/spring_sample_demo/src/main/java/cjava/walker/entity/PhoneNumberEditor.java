@@ -1,4 +1,4 @@
-package feng.shi.model;
+package cjava.walker.entity;
 
 import java.beans.PropertyEditorSupport;
 import java.util.regex.Matcher;
@@ -17,7 +17,7 @@ public class PhoneNumberEditor extends PropertyEditorSupport {
         }  
         Matcher matcher = pattern.matcher(text);  
         if(matcher.matches()) {  
-            PhoneNumberModel phoneNumber = new PhoneNumberModel();  
+            PhoneNumber phoneNumber = new PhoneNumber();  
             phoneNumber.setAreaCode(matcher.group(1));  
             phoneNumber.setPhoneNumber(matcher.group(2));  
             setValue(phoneNumber);  
@@ -27,7 +27,7 @@ public class PhoneNumberEditor extends PropertyEditorSupport {
     }  
     @Override  
     public String getAsText() {  
-        PhoneNumberModel phoneNumber = ((PhoneNumberModel)getValue());  
+        PhoneNumber phoneNumber = ((PhoneNumber)getValue());  
         return phoneNumber == null ? "" : phoneNumber.getAreaCode() + "-" + phoneNumber.getPhoneNumber();  
     }  
 }  

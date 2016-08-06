@@ -33,7 +33,7 @@ import org.springframework.web.util.UrlPathHelper;
 
 import feng.shi.support.AccessAuth;
 
-public class MyHandlerInterceptor extends HandlerInterceptorAdapter implements BeanPostProcessor{
+public class AuthHandlerInterceptor extends HandlerInterceptorAdapter implements BeanPostProcessor{
 	
 	private Logger logger = LoggerFactory.getLogger("Auth_Access");
 	

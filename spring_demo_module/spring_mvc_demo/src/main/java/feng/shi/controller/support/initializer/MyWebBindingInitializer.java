@@ -9,8 +9,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.support.WebBindingInitializer;
 import org.springframework.web.context.request.WebRequest;
 
-import feng.shi.model.PhoneNumberEditor;
 import feng.shi.model.PhoneNumberModel;
+import feng.shi.model.PhoneNumberModelEditor;
 
 public class MyWebBindingInitializer implements WebBindingInitializer { 
 	
@@ -23,6 +23,6 @@ public class MyWebBindingInitializer implements WebBindingInitializer {
         //表示如果命令对象有Date类型的属性，将使用该属性编辑器进行类型转换  
         binder.registerCustomEditor(Date.class, dateEditor);  
         //自定义的电话号码编辑器  
-        binder.registerCustomEditor(PhoneNumberModel.class, new PhoneNumberEditor());  
+        binder.registerCustomEditor(PhoneNumberModel.class, new PhoneNumberModelEditor());  
     }  
 }  
