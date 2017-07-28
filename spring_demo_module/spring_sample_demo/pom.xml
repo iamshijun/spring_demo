@@ -271,6 +271,22 @@
 
 	<build>
 		<finalName>spring_demo</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>*</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/test/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>*</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<!-- mvn dependency:copy-dependencies -DoutputDirectory=${project.basedir}/src/main/webapp/WEB-INF/lib -->
 			

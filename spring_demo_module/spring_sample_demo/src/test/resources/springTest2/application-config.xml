@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- location的只会被 ResourceArrayPropertyEditor 进行转换
+	  其中里面使用到propertyResolver如果没有指定是StandardEnvironment实例->委托给属性 PropertySourcesPropertyResolver来替换其中的值,
+	 即 patchmarker.properties.config.location会在systemEnv,systemProperties中查找
+	-->
+	<!-- 另外 注意当前的spring(3.2.8)0版本当下面的配置patch.properties前面指定classpath*:会报错 而在spring4.3.2版本是可行的-->
+    <util:properties id="configProperties" location="${patchmarker.properties.config.location:patch.properties}"/>
+
+    <context:property-placeholder properties-ref="configProperties"/>
+	
+	<context:component-scan base-package="cjava.walker.config"/>
+</beans>
