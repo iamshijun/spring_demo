@@ -21,6 +21,7 @@
 		
 		<module>spring_jdbc_memo</module>
 		<module>spring_aop_demo</module>
+		<module>spring_jpa_demo</module>
 	</modules>
 	
 	<dependencies>

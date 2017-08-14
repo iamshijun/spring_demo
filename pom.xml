@@ -17,15 +17,22 @@
     </scm>
 
 	<properties>
-		<spring.version>3.2.8.RELEASE</spring.version>
-		<!-- <spring.version>4.1.0.RELEASE</spring.version> -->
+<!-- 		<spring.version>3.2.8.RELEASE</spring.version> -->
+		<spring.version>4.3.2.RELEASE</spring.version>
 		<!-- 不要改编码 不然的话 在Update Project的时候就会出现乱码 各个项目中的注释無駄にするzou -->
 		<aspectj.version>1.7.4</aspectj.version>		
 		<slf4j.version>1.7.5</slf4j.version>
-		<junit.version>4.11</junit.version>
-		<jdk.version>1.7</jdk.version>
+		<junit.version>4.12</junit.version>
 		
-		<project.build.sourceEncoding>GBK</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.compilerVersion>${java.version}</maven.compiler.compilerVersion>
+		
+		<project.encoding>GBK</project.encoding>
+		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+		<project.build.sourceEncoding>${project.encoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${project.encoding}</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencyManagement>
@@ -220,8 +227,8 @@
 					<configuration>
  						<!--<source>1.8</source> -->
  						<!--<target>1.8</target> -->
-						<source>${jdk.version}</source>
- 						<target>${jdk.version}</target>
+						<source>${java.version}</source>
+ 						<target>${java.version}</target>
 						<encoding>GBK</encoding>
 					</configuration>
 				</plugin>

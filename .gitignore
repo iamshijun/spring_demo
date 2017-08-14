@@ -2,7 +2,10 @@
 .logs/
 */logs/
 */*/logs/
-*/target/
+**/target/
+**/.settings
+**/.project
+**/.classpath
 
 # maven ignore
 target/
